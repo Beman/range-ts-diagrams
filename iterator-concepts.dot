@@ -1,0 +1,73 @@
+digraph iterator_concepts
+{
+  graph [fontname = "courier"];
+  node [fontname = "courier"];
+  edge [fontname = "courier"];
+  
+  dereferenceable [shape=box, label="{*i} -> auto&&;\n// i is dereferenceable"]
+  weakly_incrementable_i [label="WeaklyIncrementable<I>"]
+  incrementable_i [label="Incrementable<I>"]
+  weak_iterator_i [label="WeakIterator<I>"]
+  equality_comparable_i [label="EqualityComparable<I>"]
+  equality_comparable_t_i [label="EqualityComparable<T, I>"]
+  regular_t [label="Regular<T>"]
+  iterator_i [label="Iterator<I>"]
+  sentinal_t_i [label="Sentinel<T, I>"]
+  weak_input_iterator_i [label="WeakInputIterator<I>"]
+  readable_i [label="Readable<I>"]
+  wii_req [shape=box, label="typename IteratorCategory<I>;\n{ i++ } -> Readable;\nrequires Derived<IteratorCategory<I>,\nweak_input_iterator_tag>;"]
+  input_iterator_i [label="InputIterator<I>"]
+  derived_ii [label="Derived<IteratorCategory<I>,\n input_iterator_tag>"]
+  derived_fi [label="Derived<IteratorCategory<I>,\n forward_iterator_tag>"]
+  derived_bi [label="Derived<IteratorCategory<I>,\n bidirectional_iterator_tag>"]
+  derived_rai [label="Derived<IteratorCategory<I>,\n random_access_iterator_tag>"]
+  bi_req [shape=box, label="{ --i };\nrequires Same<I&, decltype(--i)>;\n{ i-- };\nrequires Same<I, decltype(i--)>;"]
+  forward_iterator_i [label="ForwardIterator<I>"]
+  bidirectional_iterator_i [label="BidirectionalIterator<I>"]
+  random_access_iterator_i [label="RandomAccessIterator<I>"]
+  totally_ordered_i [label="TotallyOrdered<I>"]
+  sar_ii [label="SizedIteratorRange<I, I>"]
+  traversal_ops [label="traversal operations;\nsee 24.2.9"]
+  weak_output_iterator_i_t [label="WeakOutputIterator<I, T>"]
+  writeable_i_t [label="Writeable<I, T>"] 
+  output_iterator_i_t [label="OutputIterator<I, T>"]
+   
+  weak_iterator_i -> weakly_incrementable_i;
+  weak_iterator_i -> dereferenceable
+  
+  iterator_i -> weak_iterator_i;
+  iterator_i -> equality_comparable_i;
+  
+  sentinal_t_i -> regular_t;
+  sentinal_t_i -> iterator_i;
+  sentinal_t_i -> equality_comparable_t_i
+  
+  weak_input_iterator_i -> weak_iterator_i;
+  weak_input_iterator_i -> readable_i;
+  weak_input_iterator_i -> wii_req;
+  
+  input_iterator_i -> weak_input_iterator_i;
+  input_iterator_i -> iterator_i;
+  input_iterator_i -> derived_ii;
+  
+  forward_iterator_i -> input_iterator_i;
+  forward_iterator_i -> incrementable_i;
+  forward_iterator_i -> derived_fi;
+  
+  bidirectional_iterator_i -> forward_iterator_i;
+  bidirectional_iterator_i -> derived_bi;
+  bidirectional_iterator_i -> bi_req;
+  
+  random_access_iterator_i -> bidirectional_iterator_i;
+  random_access_iterator_i -> totally_ordered_i;
+  random_access_iterator_i -> derived_rai;
+  random_access_iterator_i -> sar_ii;
+  random_access_iterator_i -> traversal_ops;
+  
+  weak_output_iterator_i_t -> weak_iterator_i;
+  weak_output_iterator_i_t -> writeable_i_t;
+  
+  output_iterator_i_t -> weak_output_iterator_i_t;
+  output_iterator_i_t -> iterator_i;
+  
+}
