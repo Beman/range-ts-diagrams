@@ -1,0 +1,29 @@
+// Iterator Concepts
+
+// © Copyright Beman Dawes 2015
+
+digraph simple_iterator_concepts
+{
+  //rankdir = BT;
+  graph [fontname = "courier"];
+  node [fontname = "courier"];
+  edge [fontname = "courier"];
+  
+  RandomAccessIterator -> BiDirectionalIterator;
+  BiDirectionalIterator -> ForwardIterator;
+  ForwardIterator -> InputIterator;
+   
+  InputIterator -> WeakInputIterator;
+  InputIterator -> Iterator;
+  
+  WeakInputIterator -> Readable;
+  WeakInputIterator -> WeakIterator;
+  
+  Iterator -> WeakIterator;
+  
+  OutputIterator -> WeakOutputIterator;
+  OutputIterator -> Iterator;
+
+  WeakOutputIterator -> Writable;
+  WeakOutputIterator -> WeakIterator;
+}
