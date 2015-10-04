@@ -1,0 +1,57 @@
+// Regular concepts
+
+// © Copyright Beman Dawes 2015
+
+/*
+digraph sentinel_concepts
+{
+  graph [fontname = "courier"];
+  node [fontname = "courier"];
+  edge [fontname = "courier"];
+  
+  sentinel_t_i [label="Sentinel<T, I>"]
+  equality_comparable_t_i [label="EqualityComparable<T, I>"]
+  regular_t [label="Regular<T>"]
+  iterator_i [label="Iterator<I>"]
+  
+  sentinel_t_i -> regular_t;
+  sentinel_t_i -> iterator_i;
+  sentinel_t_i -> equality_comparable_t_i
+}
+*/
+
+digraph regular
+{
+  graph [fontname = "courier"];
+  node [fontname = "courier"];
+  edge [fontname = "courier"];
+  
+  Regular -> Semiregular;
+  Regular -> EqualityComparable;
+  
+  Semiregular -> Copyable;
+  Semiregular -> DefaultConstructible;
+  
+  Copyable -> CopyConstructible;
+  Copyable -> Movable;
+  Copyable -> Assignable;
+  
+  Movable -> MoveConstructible;
+  Movable -> Assignable;
+  
+  CopyConstructible -> MoveConstructible;
+  CopyConstructible -> Constructible;
+  CopyConstructible -> Convertible;
+  CopyConstructible -> Convertible;
+  CopyConstructible -> Convertible;
+  
+  MoveConstructible -> Constructible;
+  MoveConstructible -> Convertible;
+  
+  DefaultConstructible -> Constructible;
+  
+  Constructible -> Destructible;
+  
+  
+}
+
